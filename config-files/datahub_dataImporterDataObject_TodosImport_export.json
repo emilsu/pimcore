@@ -1,0 +1,123 @@
+{
+    "type": "dataImporterDataObject",
+    "path": "",
+    "name": "TodosImport",
+    "group": "",
+    "configuration": {
+        "general": {
+            "active": true,
+            "type": "dataImporterDataObject",
+            "name": "TodosImport",
+            "description": "",
+            "group": "",
+            "path": null
+        },
+        "loaderConfig": {
+            "type": "http",
+            "settings": {
+                "schema": "https:\/\/",
+                "url": "jsonplaceholder.typicode.com\/todos\/"
+            }
+        },
+        "interpreterConfig": {
+            "type": "json"
+        },
+        "resolverConfig": {
+            "elementType": "dataObject",
+            "dataObjectClassId": "7",
+            "loadingStrategy": {
+                "type": "notLoad"
+            },
+            "createLocationStrategy": {
+                "type": "staticPath",
+                "settings": {
+                    "path": "\/importTodo"
+                }
+            },
+            "locationUpdateStrategy": {
+                "type": "noChange"
+            },
+            "publishingStrategy": {
+                "type": "noChangePublishNew"
+            }
+        },
+        "processingConfig": {
+            "executionType": "parallel",
+            "idDataIndex": "id",
+            "cleanup": {
+                "strategy": "delete"
+            }
+        },
+        "mappingConfig": [
+            {
+                "label": "Title",
+                "dataSourceIndex": [
+                    "title"
+                ],
+                "transformationResultType": "default",
+                "dataTarget": {
+                    "type": "direct",
+                    "settings": {
+                        "fieldName": "Title",
+                        "language": "",
+                        "writeIfTargetIsNotEmpty": true,
+                        "writeIfSourceIsEmpty": true
+                    }
+                },
+                "transformationPipeline": []
+            },
+            {
+                "label": "Completed",
+                "dataSourceIndex": [
+                    "completed"
+                ],
+                "transformationResultType": "boolean",
+                "dataTarget": {
+                    "type": "direct",
+                    "settings": {
+                        "fieldName": "completed",
+                        "language": "",
+                        "writeIfTargetIsNotEmpty": true,
+                        "writeIfSourceIsEmpty": true
+                    }
+                },
+                "transformationPipeline": [
+                    {
+                        "type": "boolean"
+                    }
+                ]
+            },
+            {
+                "label": "Id",
+                "dataSourceIndex": [
+                    "id"
+                ],
+                "transformationResultType": "numeric",
+                "dataTarget": {
+                    "type": "direct",
+                    "settings": {
+                        "fieldName": "idik",
+                        "language": "",
+                        "writeIfTargetIsNotEmpty": true,
+                        "writeIfSourceIsEmpty": true
+                    }
+                },
+                "transformationPipeline": [
+                    {
+                        "type": "numeric"
+                    }
+                ]
+            }
+        ],
+        "executionConfig": {
+            "scheduleType": "recurring",
+            "cronDefinition": "*\/15 * * * *",
+            "scheduledAt": "12-11-2023 00:00"
+        },
+        "permissions": {
+            "user": [],
+            "role": []
+        },
+        "workspaces": []
+    }
+}

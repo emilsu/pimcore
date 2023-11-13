@@ -1,0 +1,126 @@
+{
+    "type": "dataImporterDataObject",
+    "path": "",
+    "name": "AirportImport",
+    "group": "",
+    "configuration": {
+        "general": {
+            "active": true,
+            "type": "dataImporterDataObject",
+            "name": "AirportImport",
+            "description": "",
+            "group": "",
+            "path": null
+        },
+        "loaderConfig": {
+            "type": "upload",
+            "settings": {
+                "uploadFilePath": "AirportImport\/upload.import"
+            }
+        },
+        "interpreterConfig": {
+            "type": "csv",
+            "settings": {
+                "skipFirstRow": true,
+                "delimiter": ",",
+                "enclosure": "\"",
+                "escape": "\\"
+            }
+        },
+        "resolverConfig": {
+            "elementType": "dataObject",
+            "dataObjectClassId": "8",
+            "loadingStrategy": {
+                "type": "notLoad"
+            },
+            "createLocationStrategy": {
+                "type": "staticPath",
+                "settings": {
+                    "path": "\/AirportData\/Airports"
+                }
+            },
+            "locationUpdateStrategy": {
+                "type": "noChange"
+            },
+            "publishingStrategy": {
+                "type": "noChangeUnpublishNew"
+            }
+        },
+        "processingConfig": {
+            "executionType": "parallel",
+            "idDataIndex": ""
+        },
+        "mappingConfig": [
+            {
+                "label": "id",
+                "dataSourceIndex": [
+                    "0"
+                ],
+                "transformationResultType": "numeric",
+                "dataTarget": {
+                    "type": "direct",
+                    "settings": {
+                        "fieldName": "airport_id",
+                        "language": "",
+                        "writeIfTargetIsNotEmpty": true,
+                        "writeIfSourceIsEmpty": true
+                    }
+                },
+                "transformationPipeline": [
+                    {
+                        "type": "numeric"
+                    }
+                ]
+            },
+            {
+                "label": "coordinates",
+                "dataSourceIndex": [
+                    "4",
+                    "5"
+                ],
+                "transformationResultType": "geoPoint",
+                "dataTarget": {
+                    "type": "direct",
+                    "settings": {
+                        "fieldName": "coordinates",
+                        "language": "",
+                        "writeIfTargetIsNotEmpty": true,
+                        "writeIfSourceIsEmpty": true
+                    }
+                },
+                "transformationPipeline": [
+                    {
+                        "type": "asGeopoint"
+                    }
+                ]
+            },
+            {
+                "label": "name",
+                "dataSourceIndex": [
+                    "3"
+                ],
+                "transformationResultType": "default",
+                "dataTarget": {
+                    "type": "direct",
+                    "settings": {
+                        "fieldName": "name",
+                        "language": "",
+                        "writeIfTargetIsNotEmpty": true,
+                        "writeIfSourceIsEmpty": true
+                    }
+                },
+                "transformationPipeline": []
+            }
+        ],
+        "executionConfig": {
+            "scheduleType": "job",
+            "cronDefinition": "",
+            "scheduledAt": ""
+        },
+        "permissions": {
+            "user": [],
+            "role": []
+        },
+        "workspaces": []
+    }
+}

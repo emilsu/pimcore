@@ -1,0 +1,194 @@
+{
+    "type": "dataImporterDataObject",
+    "path": "",
+    "name": "FreqImport",
+    "group": "",
+    "configuration": {
+        "general": {
+            "active": true,
+            "type": "dataImporterDataObject",
+            "name": "FreqImport",
+            "description": "",
+            "group": "",
+            "path": null
+        },
+        "loaderConfig": {
+            "type": "upload",
+            "settings": {
+                "uploadFilePath": "FreqImport\/upload.import"
+            }
+        },
+        "interpreterConfig": {
+            "type": "csv",
+            "settings": {
+                "skipFirstRow": true,
+                "delimiter": ",",
+                "enclosure": "\"",
+                "escape": "\\"
+            }
+        },
+        "resolverConfig": {
+            "elementType": "dataObject",
+            "dataObjectClassId": "9",
+            "loadingStrategy": {
+                "type": "notLoad"
+            },
+            "createLocationStrategy": {
+                "type": "staticPath",
+                "settings": {
+                    "path": "\/AirportData\/Frequencies"
+                }
+            },
+            "locationUpdateStrategy": {
+                "type": "noChange"
+            },
+            "publishingStrategy": {
+                "type": "noChangeUnpublishNew"
+            }
+        },
+        "processingConfig": {
+            "executionType": "parallel",
+            "idDataIndex": ""
+        },
+        "mappingConfig": [
+            {
+                "label": "id [0]",
+                "dataSourceIndex": [
+                    "0"
+                ],
+                "transformationResultType": "numeric",
+                "dataTarget": {
+                    "type": "direct",
+                    "settings": {
+                        "fieldName": "freq_id",
+                        "language": "",
+                        "writeIfTargetIsNotEmpty": true,
+                        "writeIfSourceIsEmpty": true
+                    }
+                },
+                "transformationPipeline": [
+                    {
+                        "type": "numeric"
+                    }
+                ]
+            },
+            {
+                "label": "airport_ref [1]",
+                "dataSourceIndex": [
+                    "1"
+                ],
+                "settings": {
+                    "loadStrategy": "attribute",
+                    "attributeDataObjectClassId": "8",
+                    "attributeName": "airport_id",
+                    "attributeLanguage": "",
+                    "loadUnpublished": "on"
+                },
+                "transformationResultType": "dataObject",
+                "dataTarget": {
+                    "type": "direct",
+                    "settings": {
+                        "fieldName": "airport_id",
+                        "language": "",
+                        "writeIfTargetIsNotEmpty": true,
+                        "writeIfSourceIsEmpty": true
+                    }
+                },
+                "transformationPipeline": [
+                    {
+                        "settings": {
+                            "loadStrategy": "attribute",
+                            "attributeDataObjectClassId": "8",
+                            "attributeName": "airport_id",
+                            "attributeLanguage": "",
+                            "loadUnpublished": "on"
+                        },
+                        "type": "loadDataObject"
+                    }
+                ]
+            },
+            {
+                "label": "airport_ident [2]",
+                "dataSourceIndex": [
+                    "2"
+                ],
+                "transformationResultType": "default",
+                "dataTarget": {
+                    "type": "direct",
+                    "settings": {
+                        "fieldName": "airport_ident",
+                        "language": "",
+                        "writeIfTargetIsNotEmpty": true,
+                        "writeIfSourceIsEmpty": true
+                    }
+                },
+                "transformationPipeline": []
+            },
+            {
+                "label": "type [3]",
+                "dataSourceIndex": [
+                    "3"
+                ],
+                "transformationResultType": "default",
+                "dataTarget": {
+                    "type": "direct",
+                    "settings": {
+                        "fieldName": "ftype",
+                        "language": "",
+                        "writeIfTargetIsNotEmpty": true,
+                        "writeIfSourceIsEmpty": true
+                    }
+                },
+                "transformationPipeline": []
+            },
+            {
+                "label": "description [4]",
+                "dataSourceIndex": [
+                    "4"
+                ],
+                "transformationResultType": "default",
+                "dataTarget": {
+                    "type": "direct",
+                    "settings": {
+                        "fieldName": "description",
+                        "language": "",
+                        "writeIfTargetIsNotEmpty": true,
+                        "writeIfSourceIsEmpty": true
+                    }
+                },
+                "transformationPipeline": []
+            },
+            {
+                "label": "frequency_mhz [5]",
+                "dataSourceIndex": [
+                    "5"
+                ],
+                "transformationResultType": "numeric",
+                "dataTarget": {
+                    "type": "direct",
+                    "settings": {
+                        "fieldName": "frequency",
+                        "language": "",
+                        "writeIfTargetIsNotEmpty": true,
+                        "writeIfSourceIsEmpty": true
+                    }
+                },
+                "transformationPipeline": [
+                    {
+                        "type": "numeric"
+                    }
+                ]
+            }
+        ],
+        "executionConfig": {
+            "scheduleType": "recurring",
+            "cronDefinition": "",
+            "scheduledAt": ""
+        },
+        "permissions": {
+            "user": [],
+            "role": []
+        },
+        "workspaces": []
+    }
+}
